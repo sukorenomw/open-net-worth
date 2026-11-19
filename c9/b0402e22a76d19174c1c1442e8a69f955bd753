@@ -1,0 +1,42 @@
+frontend/src/components/intel/TradingAgentsPanel.tsx
+  s_cd971305e7b2c7::t_50f2da0068cb0e 44-45
+frontend/src/hooks/useTradingAgents.ts
+  s_cd971305e7b2c7::t_50f2da0068cb0e 21-22
+frontend/src/components/intel/TradingAgentsShared.tsx
+  s_cd971305e7b2c7::t_50f2da0068cb0e 26
+frontend/src/components/intel/tradingAgentsFixtures.ts
+  s_cd971305e7b2c7::t_50f2da0068cb0e 26
+frontend/src/components/tabs/connectors/TradingAgentsSection.tsx
+  s_cd971305e7b2c7::t_50f2da0068cb0e 23,81-86
+frontend/src/components/intel/TradingAgentsRunForm.tsx
+  s_cd971305e7b2c7::t_50f2da0068cb0e 57-59
+frontend/src/types/tradingAgents.ts
+  s_cd971305e7b2c7::t_50f2da0068cb0e 10,56-57,77
+frontend/src/components/intel/TradingAgentsCard.test.tsx
+  s_cd971305e7b2c7::t_ed6a92cc8784be 72
+  s_cd971305e7b2c7::t_603b7c4c66c0a3 136-140
+  s_cd971305e7b2c7::t_93e65d7973bad2 258,266-280
+  s_cd971305e7b2c7::t_e37be091e3e1fc 135,281-283
+frontend/src/components/tabs/connectors/TradingAgentsSection.test.tsx
+  s_cd971305e7b2c7::t_116d952e823d2b 107-119
+frontend/src/components/tabs/connectors/TradingAgentsInstall.tsx
+  s_cd971305e7b2c7::t_50f2da0068cb0e 24-30,65-69,81
+docs/product/features/trading-agents.md
+  s_cd971305e7b2c7::t_6f4681782e1ec9 35-37
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "c9b0402e22a76d19174c1c1442e8a69f955bd753",
+  "prompts": {},
+  "sessions": {
+    "s_cd971305e7b2c7": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "0efd75dd-3659-42ce-929a-45b46eac3540",
+        "model": "claude-sonnet-5-5"
+      },
+      "human_author": "Sukoreno Mukti Widodo <sukoreno.mukti@deliveryhero.com>"
+    }
+  }
+}
