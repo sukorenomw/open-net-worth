@@ -1,0 +1,36 @@
+backend/api/cost.py
+  s_cd971305e7b2c7::t_c477be66150ed3 9,21,90-101
+backend/db/trading_agents_run_store.py
+  s_cd971305e7b2c7::t_76c85b944a6871 14,113
+  s_cd971305e7b2c7::t_d68b00b9ed19c3 21-46,106-112,114-123
+backend/services/trading_agents/costs.py
+  s_cd971305e7b2c7::t_c477be66150ed3 1-33,42-195
+  s_cd971305e7b2c7::t_5bbd118ccfb617 34-41
+backend/services/trading_agents/budget.py
+  s_cd971305e7b2c7::t_0e05a315048027 1-4,6-8,10-19
+  s_cd971305e7b2c7::t_c477be66150ed3 24,137
+  s_cd971305e7b2c7::t_0ec56d26965832 5,9,20-23,25-129,131-136,138-224
+  s_cd971305e7b2c7::t_3c923b2b02af40 130
+backend/services/cost.py
+  s_cd971305e7b2c7::t_c477be66150ed3 9,51-53,117-118,438
+tests/test_trading_agents_budget_costs.py
+  s_cd971305e7b2c7::t_ca2c34689b77ae 235
+  s_cd971305e7b2c7::t_48d4138ca4754b 1-233,236-248,250-348
+  s_cd971305e7b2c7::t_139740208f827a 234,249
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "3a94c0379ee74bbb8b4349b146cff64a95aa01d7",
+  "prompts": {},
+  "sessions": {
+    "s_cd971305e7b2c7": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "0efd75dd-3659-42ce-929a-45b46eac3540",
+        "model": "claude-sonnet-5-5"
+      },
+      "human_author": "Sukoreno Mukti Widodo <sukoreno.mukti@deliveryhero.com>"
+    }
+  }
+}
