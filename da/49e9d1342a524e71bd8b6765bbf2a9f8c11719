@@ -1,0 +1,51 @@
+tests/test_char_tool_dispatch.py
+  s_cd971305e7b2c7::t_e729f9ad7b6ac0 76-92
+tests/golden/tool_input_schemas.json
+  s_cd971305e7b2c7::t_73411b9addac8f 11374-11468
+tests/test_trading_agents_tools.py
+  s_cd971305e7b2c7::t_74b834f2e09433 1-11,13-23,25-27,29-142,144-265,295-317,319,321-393
+  s_cd971305e7b2c7::t_af29aa4ebdb1bd 318
+  s_cd971305e7b2c7::t_95eabad108bd54 28,143,320
+  s_cd971305e7b2c7::t_e729f9ad7b6ac0 266,275-281,283,291-294
+  s_cd971305e7b2c7::t_d8cd00f9f3111b 12,24,267-274,282,284-290
+tests/test_connectors_api.py
+  s_cd971305e7b2c7::t_272a65575fa8bf 43-46
+  s_cd971305e7b2c7::t_6e6e68b7b7212a 34,36-37,47
+backend/ai/tools/trading_agents.py
+  s_cd971305e7b2c7::t_335b7188396926 1-71,75-94,97-401
+  s_cd971305e7b2c7::t_272a65575fa8bf 72-74,95-96
+backend/services/connector_copy.py
+  s_cd971305e7b2c7::t_8a471a5d3b8795 342-355
+docs/ai/TOOL_CATALOG.md
+  s_cd971305e7b2c7::t_ecd929a6c940b8 51
+docs/ai/TOOL_CONVENTIONS.md
+  s_cd971305e7b2c7::t_34e57c3881f90a 24
+CLAUDE.md
+  s_cd971305e7b2c7::t_34e57c3881f90a 302
+tests/test_connectors_service.py
+  s_cd971305e7b2c7::t_6e6e68b7b7212a 33,35-36,47-48,50
+  s_cd971305e7b2c7::t_272a65575fa8bf 49
+backend/services/trading_agents/runs.py
+  s_cd971305e7b2c7::t_e9aff0ce2a4a4c 107
+  s_cd971305e7b2c7::t_77a17a45f21c43 139
+backend/ai/tools/__init__.py
+  s_cd971305e7b2c7::t_8a471a5d3b8795 90,306
+backend/ai/tools/_write_classification.py
+  s_cd971305e7b2c7::t_8a471a5d3b8795 97-99
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "da49e9d1342a524e71bd8b6765bbf2a9f8c11719",
+  "prompts": {},
+  "sessions": {
+    "s_cd971305e7b2c7": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "0efd75dd-3659-42ce-929a-45b46eac3540",
+        "model": "claude-sonnet-5-5"
+      },
+      "human_author": "Sukoreno Mukti Widodo <sukoreno.mukti@deliveryhero.com>"
+    }
+  }
+}
