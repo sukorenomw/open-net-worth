@@ -1,0 +1,149 @@
+frontend/src/components/chat/approval/bodies/GenericBodies.tsx
+  s_cd971305e7b2c7::t_98ad49cb5fb475 36,406
+frontend/src/components/tabs/connectors/TradingAgentsSection.tsx
+  s_cd971305e7b2c7::t_c8d86c068136bc 1,112-120,154
+  s_cd971305e7b2c7::t_5d3b4dc8eca681 57-58,130-131,219-222,237-238,240-241,333-371,373-378,389-405,464-468,488-493,499-502
+  s_cd971305e7b2c7::t_5a809859f98f54 10-11
+  s_cd971305e7b2c7::t_2455408f8f518b 2-9,12-35,37-56,59-111,121-129,132-153,155-218,223-236,239,242-332,372,379-388,406-463,469-487,494-498,503-537
+  s_cd971305e7b2c7::t_6ed162a995ecee 36
+frontend/src/components/intel/TradingAgentsRunForm.tsx
+  s_cd971305e7b2c7::t_e13bc995cb777a 1-8,10-11,13-29,32-91,93-239
+  s_cd971305e7b2c7::t_76001d3dbd64d0 12
+  s_cd971305e7b2c7::t_5d3b4dc8eca681 9,30-31,92
+frontend/src/components/tabs/connectors/ConnectorConfig.tsx
+  s_cd971305e7b2c7::t_9d28572cbd4976 41,68,146-147
+frontend/src/components/tabs/connectors/TradingAgentsFields.tsx
+  s_cd971305e7b2c7::t_6ed162a995ecee 1-150
+frontend/src/index.css
+  s_cd971305e7b2c7::t_f7619d34af99b0 21518-21846
+frontend/src/components/chat/approval/fixtures/tradingAgentsRun.ts
+  s_cd971305e7b2c7::t_5a809859f98f54 50
+  s_cd971305e7b2c7::t_3c7c1d55cc756b 1-49,51-102,105-141
+  s_cd971305e7b2c7::t_5d3b4dc8eca681 103-104
+frontend/src/components/tabs/connectors/tradingAgentsDraft.ts
+  s_cd971305e7b2c7::t_b7c5f53b9c3fd3 1-68,75-118,124-134
+  s_cd971305e7b2c7::t_5d3b4dc8eca681 69-74,119-123
+frontend/src/components/intel/TradingAgentsCard.test.tsx
+  s_cd971305e7b2c7::t_de7191b710a732 1-8,10-149,151-188,190-191,193-298,300,302-425
+  s_cd971305e7b2c7::t_f31454d0a56c42 9,189,192
+  s_cd971305e7b2c7::t_29be46ec971144 150,299,301
+  s_cd971305e7b2c7::t_83a3527125558e 426-491
+frontend/src/types/tradingAgents.ts
+  s_cd971305e7b2c7::t_5d3b4dc8eca681 272-278
+  s_cd971305e7b2c7::t_9149cd8e85d0f6 422
+  s_cd971305e7b2c7::t_cf7a86902b2104 424-426
+  s_cd971305e7b2c7::t_3bdf686bf75a10 1-271,279-421,423
+frontend/src/components/tabs/connectors/TradingAgentsInstall.tsx
+  s_cd971305e7b2c7::t_6c7a1dd4940498 1-85
+frontend/src/components/tabs/settings/sections/TradingAgentsCostParts.tsx
+  s_cd971305e7b2c7::t_005a024ee08b19 1,5
+  s_cd971305e7b2c7::t_dbf6da0e2cdf2e 2-4,6-37,45-46,48-59,63-70,76-123
+  s_cd971305e7b2c7::t_5d3b4dc8eca681 38-44,60-62,71-75
+  s_cd971305e7b2c7::t_2c821425980b82 47
+frontend/src/components/tabs/settings/sections/TradingAgentsCostPanel.tsx
+  s_cd971305e7b2c7::t_4bfc1d491457f8 10-11
+  s_cd971305e7b2c7::t_5d3b4dc8eca681 40-41,139
+  s_cd971305e7b2c7::t_e61fe1696864b6 1-9,12-39,42-138,140-169
+frontend/src/components/tabs/settings/sections/tradingAgentsCostRows.ts
+  s_cd971305e7b2c7::t_005a024ee08b19 1-77
+frontend/src/utils/tradingAgents.ts
+  s_cd971305e7b2c7::t_c9441ce37f3213 53-83,133
+  s_cd971305e7b2c7::t_6c1389ab23f1a2 29
+  s_cd971305e7b2c7::t_1c294e5aa7bf00 30
+  s_cd971305e7b2c7::t_cf7a86902b2104 4-11,84-132
+  s_cd971305e7b2c7::t_e1804d2e09e1b0 1-3,12-28,31-52
+frontend/src/components/chat/approval/bodies/TradingAgentsBodies.test.tsx
+  s_cd971305e7b2c7::t_4581f9feb6e6c6 1-5,7-11,18-61,64-70,74-83,87-101,105-112,116-136,138-147
+  s_cd971305e7b2c7::t_5a809859f98f54 137
+  s_cd971305e7b2c7::t_1c294e5aa7bf00 6,12-17,62-63
+  s_cd971305e7b2c7::t_5d3b4dc8eca681 71-73,84-86,102-104,113-115
+frontend/src/components/intel/TradingAgentsProgress.tsx
+  s_cd971305e7b2c7::t_cf7a86902b2104 2,4-5
+  s_cd971305e7b2c7::t_9b176287f5e88b 57,79,86,106
+  s_cd971305e7b2c7::t_3c4731c3d863e9 1,3,6-56,58-78,80-85,87-105,107-127
+docs/specs/trading-agents-ui.md
+  s_cd971305e7b2c7::t_3121306dce2bb8 281-365,367-434,436-503,505-527
+  s_cd971305e7b2c7::t_c6139b3e557ef0 47,60,225,271,366,435,504,698
+  s_cd971305e7b2c7::t_94cc7a0b1f06a4 528-674
+  s_cd971305e7b2c7::t_0d84e17ea57824 1-46,48-59,61-224,226-270,272-280
+  s_cd971305e7b2c7::t_5d60ed3f4c0409 860-956
+  s_cd971305e7b2c7::t_2059509d89d776 675-697,699-859
+frontend/src/components/intel/TradingAgentsStopped.tsx
+  s_cd971305e7b2c7::t_9c5a8c71ee4503 1-67
+frontend/src/components/intel/AssetDetailView.tsx
+  s_cd971305e7b2c7::t_cbcc1bf121d101 37,1186-1187
+  s_cd971305e7b2c7::t_cd3dabf299c227 1188
+frontend/src/components/tabs/settings/sections/costWindow.ts
+  s_cd971305e7b2c7::t_a0ace49d96131b 1-23
+frontend/src/components/intel/TradingAgentsRating.tsx
+  s_cd971305e7b2c7::t_9a5a339a737678 15,26
+  s_cd971305e7b2c7::t_3afccbaa6c78c3 1-14,16-21,23-25,27-34
+  s_cd971305e7b2c7::t_c5140747a11a0d 22
+frontend/src/components/tabs/connectors/ConnectorConfig.test.tsx
+  s_cd971305e7b2c7::t_af5fafc3d9ea10 565-568
+frontend/src/components/tabs/connectors/catalog.ts
+  s_cd971305e7b2c7::t_b87677685c6d86 490-493
+  s_cd971305e7b2c7::t_0af0df9b7ad38c 478-489,494-497
+  s_cd971305e7b2c7::t_07cafb714f5273 477
+frontend/src/components/intel/TradingAgentsReport.tsx
+  s_cd971305e7b2c7::t_65e163a218f907 1-87,89-128,135-161
+  s_cd971305e7b2c7::t_5d3b4dc8eca681 88,129-134
+frontend/src/components/intel/TradingAgentsShared.tsx
+  s_cd971305e7b2c7::t_5d3b4dc8eca681 51-53,57-60,64-66
+  s_cd971305e7b2c7::t_a6b23f03b3f8e8 1-50,54-56,61-63,67-90
+frontend/src/components/intel/tradingAgentsFixtures.ts
+  s_cd971305e7b2c7::t_82a87196d9656d 2-101
+  s_cd971305e7b2c7::t_e54db789f0c82e 1
+frontend/src/components/chat/approval/bodies/TradingAgentsBodies.tsx
+  s_cd971305e7b2c7::t_5d3b4dc8eca681 58-59,137-139,146-148,187-191,238-240,246
+  s_cd971305e7b2c7::t_066fe9205cd996 1-57,60-136,140-145,149-186,192-237,241-245,247-262
+backend/services/connector_directory.json
+  s_cd971305e7b2c7::t_af5fafc3d9ea10 227-243
+  s_cd971305e7b2c7::t_53251180ff1c96 226
+frontend/src/components/intel/TradingAgentsHistory.tsx
+  s_cd971305e7b2c7::t_a5f3f03de42dca 1-26,29-32,50,53-67
+  s_cd971305e7b2c7::t_f0a9b21f735a15 27-28
+  s_cd971305e7b2c7::t_abebc65140b129 33-49,51-52
+frontend/src/components/intel/TradingAgentsCard.tsx
+  s_cd971305e7b2c7::t_cf7a86902b2104 13,17,185-186
+  s_cd971305e7b2c7::t_c8d86c068136bc 1,92,97-99,106,110
+  s_cd971305e7b2c7::t_eaee247152b824 2-12,14,16,18-63,66-91,93-96,100-105,107-109,111-184,187-192,194-273
+  s_cd971305e7b2c7::t_5d3b4dc8eca681 15,64-65,193
+frontend/src/components/tabs/settings/sections/TradingAgentsCostPanel.test.tsx
+  s_cd971305e7b2c7::t_24fbf40494204f 1-107,109-129,131-156,158-170,172-214,216-218,220-234,236-284,286-312
+  s_cd971305e7b2c7::t_e71321ad6aacd9 219
+  s_cd971305e7b2c7::t_7e44b4ca797b4f 108,130,157,171,215,235,285
+frontend/src/components/tabs/settings/sections/AiUsageSection.tsx
+  s_cd971305e7b2c7::t_a0ace49d96131b 12-14,43-44,195,211,213-216,300,352-357
+  s_cd971305e7b2c7::t_4c65d47f40183c 358
+frontend/src/components/tabs/connectors/TradingAgentsRecipients.tsx
+  s_cd971305e7b2c7::t_5d3b4dc8eca681 28-29
+  s_cd971305e7b2c7::t_d86005b8f228cd 1,5
+  s_cd971305e7b2c7::t_7e6714402ed830 2-4,6-27,30-58
+frontend/src/hooks/useTradingAgents.ts
+  s_cd971305e7b2c7::t_bf96f3a03b8469 73-76,79
+  s_cd971305e7b2c7::t_4089581d6e6c16 5,95-97,99
+  s_cd971305e7b2c7::t_90a30293637c43 1-4,6-72,77-78,80-94,98,100-186
+frontend/src/components/tabs/connectors/TradingAgentsSection.test.tsx
+  s_cd971305e7b2c7::t_cec96314d70f36 1-24,26,28-202,204-247,249-266
+  s_cd971305e7b2c7::t_da0831a5a28ee0 25,27,203,248
+frontend/src/components/chat/approval/cardTypes.ts
+  s_cd971305e7b2c7::t_98ad49cb5fb475 259-270,273-275,281
+  s_cd971305e7b2c7::t_5d3b4dc8eca681 271-272
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "a266ec4be193f15f6a47a2fb26f110b69c554835",
+  "prompts": {},
+  "sessions": {
+    "s_cd971305e7b2c7": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "0efd75dd-3659-42ce-929a-45b46eac3540",
+        "model": "claude-sonnet-5-5"
+      },
+      "human_author": "Sukoreno Mukti Widodo <sukoreno.mukti@deliveryhero.com>"
+    }
+  }
+}
