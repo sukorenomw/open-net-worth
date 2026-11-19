@@ -1,0 +1,75 @@
+backend/services/trading_agents/ticker.py
+  s_cd971305e7b2c7::t_13deefa2606ec4 16-17,19
+backend/ai/trading_agents/openai_shape.py
+  s_cd971305e7b2c7::t_13deefa2606ec4 20-21,99-107,113-116,187-189,235-238
+backend/services/trading_agents/runs.py
+  s_cd971305e7b2c7::t_13deefa2606ec4 17,76-80,274-284,301
+backend/services/trading_agents/worker/ta_worker.py
+  s_cd971305e7b2c7::t_13deefa2606ec4 75-77,254-266,278-284
+tests/test_trading_agents_bridge.py
+  s_cd971305e7b2c7::t_d0c6ca7b15776f 389-394
+backend/ai/trading_agents/worker_session.py
+  s_cd971305e7b2c7::t_13deefa2606ec4 27,43-44,48-58,75,77-81,83-85,88,125-126,220,226,287-298,300,305-306,308-310,318
+tests/test_trading_agents_settings.py
+  s_cd971305e7b2c7::t_3edba4d5ef4029 9-10,107-130
+  s_cd971305e7b2c7::t_8395137518f89c 131-132
+backend/services/trading_agents/__init__.py
+  s_cd971305e7b2c7::t_13deefa2606ec4 29,54,69-74,82-87,99
+backend/services/trading_agents/settings.py
+  s_cd971305e7b2c7::t_13deefa2606ec4 47,200-203,207-213,267-270
+tests/fixtures/trading_agents/fake_worker.py
+  s_cd971305e7b2c7::t_25578846299c35 9-11,98-106,128-133
+tests/test_trading_agents_tools.py
+  s_cd971305e7b2c7::t_f48d255624b58e 29,53
+tests/test_trading_agents_openai_shape.py
+  s_cd971305e7b2c7::t_c61e7b603cc994 264,269,271
+  s_cd971305e7b2c7::t_d0c6ca7b15776f 276-310
+  s_cd971305e7b2c7::t_010b04e85bc62b 9
+tests/test_trading_agents_runs.py
+  s_cd971305e7b2c7::t_3edba4d5ef4029 110-112,134-146,151-157
+  s_cd971305e7b2c7::t_92f54df7e567f0 147-150
+  s_cd971305e7b2c7::t_fc91b77c46806a 158-159
+tests/test_trading_agents_runner.py
+  s_cd971305e7b2c7::t_f48d255624b58e 29,72
+  s_cd971305e7b2c7::t_25578846299c35 239,253-264
+  s_cd971305e7b2c7::t_e2a159dce30210 336-357
+  s_cd971305e7b2c7::t_68a07b3f2855a0 265-266,358-359
+tests/test_trading_agents_worker.py
+  s_cd971305e7b2c7::t_d0c6ca7b15776f 207-230,232-245
+  s_cd971305e7b2c7::t_f289320c27d924 231
+tests/test_trading_agents_availability.py
+  s_cd971305e7b2c7::t_f48d255624b58e 40,43-47,100-112
+  s_cd971305e7b2c7::t_6746153ca8283a 22
+backend/services/trading_agents/install.py
+  s_cd971305e7b2c7::t_13deefa2606ec4 9-16,27,31,61-62,64,70-79,103-121,127-151,241,246-255,257,270-276,322,335
+  s_cd971305e7b2c7::t_ea9a13aeab4ffc 336
+tests/test_trading_agents_api.py
+  s_cd971305e7b2c7::t_f48d255624b58e 19,48
+backend/ai/trading_agents/llm_bridge.py
+  s_cd971305e7b2c7::t_13deefa2606ec4 39,208,294,308,377
+tests/test_trading_agents_install.py
+  s_cd971305e7b2c7::t_32e28f72cc1d64 10,74-75,79-101,128,130-131,133-134,147-152,166-167,171-205,310
+  s_cd971305e7b2c7::t_92f54df7e567f0 161-163,168-170
+  s_cd971305e7b2c7::t_65659a8271ec6e 216
+  s_cd971305e7b2c7::t_e3f6aaf639ab9a 132,153-160,164-165
+backend/ai/trading_agents/openai_errors.py
+  s_cd971305e7b2c7::t_affcc4972af4db 1-69
+backend/services/trading_agents/worker/requirements.lock
+  s_cd971305e7b2c7::t_fc926a961282de 1-2134
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "19b2502afaf97cfa56afadefcaefd0811208491b",
+  "prompts": {},
+  "sessions": {
+    "s_cd971305e7b2c7": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "0efd75dd-3659-42ce-929a-45b46eac3540",
+        "model": "claude-sonnet-5-5"
+      },
+      "human_author": "Sukoreno Mukti Widodo <sukoreno.mukti@deliveryhero.com>"
+    }
+  }
+}
