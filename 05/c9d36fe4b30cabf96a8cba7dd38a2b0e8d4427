@@ -1,0 +1,62 @@
+backend/services/trading_agents/budget.py
+  s_cd971305e7b2c7::t_014d33da5b917a 4-10,24,29,59,71,113-115,118-124,126-128,131-132,134,169-170,189-190,207-234,238-242,247-248,250,252-255
+tests/fixtures/trading_agents/fake_worker.py
+  s_cd971305e7b2c7::t_94bd9fae04784d 10,128-130
+tests/test_trading_agents_bridge.py
+  s_cd971305e7b2c7::t_9b4eae1798e90e 8-9,14,311,315,317-326,330-443,525-543
+  s_cd971305e7b2c7::t_6c08d383985fb1 312-314,316,327-329
+  s_cd971305e7b2c7::t_f45cfa44e1ff6c 544-545
+tests/test_trading_agents_budget_costs.py
+  s_cd971305e7b2c7::t_eb9baf6d1ee53b 20,69-80,146-181,196-212,217-219,225-231
+  s_cd971305e7b2c7::t_509175145c3171 213-216,220-224
+  s_cd971305e7b2c7::t_8ddda16b229ed4 232-233
+backend/ai/trading_agents/llm_bridge.py
+  s_cd971305e7b2c7::t_014d33da5b917a 10,13-19,32,40-61,73-84,87,98-102,111-118,145-151,153,181,183-184,193,195,206-213,225-227,240-241,246-248,251-254,256-282,284-288,301,304,311-312,316,318-320,323-325,327,357-398,405,418,420-423,429,435-440
+backend/ai/trading_agents/worker_session.py
+  s_cd971305e7b2c7::t_014d33da5b917a 26,128-129,169,185-186,201-215,334-336,354,366-367,382-384,388-389,397-398
+tests/test_trading_agents_tools.py
+  s_cd971305e7b2c7::t_33e211556a2f8a 172
+  s_cd971305e7b2c7::t_decf1669eba3d8 49-52,86,246-247
+tests/test_trading_agents_context.py
+  s_cd971305e7b2c7::t_ec789bc3e5decf 380-381,384,394,396
+  s_cd971305e7b2c7::t_23ed68b8ab436b 324
+  s_cd971305e7b2c7::t_0bbbd93e668753 375-379,382-383,385-393,395,397-399
+tests/test_trading_agents_api.py
+  s_cd971305e7b2c7::t_decf1669eba3d8 44-47,106,344,351
+backend/services/trading_agents/context.py
+  s_cd971305e7b2c7::t_014d33da5b917a 92-103,105,146-147,180
+backend/ai/trading_agents/openai_shape.py
+  s_cd971305e7b2c7::t_014d33da5b917a 47-48,299
+backend/services/trading_agents/settings.py
+  s_cd971305e7b2c7::t_014d33da5b917a 22,71-73,79-82,88-101,305-307,325-329,338,342-347
+backend/ai/models/pricing.py
+  s_cd971305e7b2c7::t_014d33da5b917a 35-36
+tests/test_trading_agents_runner.py
+  s_cd971305e7b2c7::t_decf1669eba3d8 69-72,180,182,523-525
+  s_cd971305e7b2c7::t_33e211556a2f8a 16,221-231,234-247
+  s_cd971305e7b2c7::t_7333c9342187c3 10
+  s_cd971305e7b2c7::t_94bd9fae04784d 148-149,345-388
+  s_cd971305e7b2c7::t_1b8465a4377675 389-390
+backend/ai/trading_agents/bridge_http.py
+  s_cd971305e7b2c7::t_0ae81c372aae44 1-129
+backend/ai/trading_agents/bridge_models.py
+  s_cd971305e7b2c7::t_f1876fe4e81f30 1-111
+backend/core/local_endpoint.py
+  s_cd971305e7b2c7::t_3ad45f7bc7ad1e 1-18
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "05c9d36fe4b30cabf96a8cba7dd38a2b0e8d4427",
+  "prompts": {},
+  "sessions": {
+    "s_cd971305e7b2c7": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "0efd75dd-3659-42ce-929a-45b46eac3540",
+        "model": "claude-sonnet-5-5"
+      },
+      "human_author": "Sukoreno Mukti Widodo <sukoreno.mukti@deliveryhero.com>"
+    }
+  }
+}
