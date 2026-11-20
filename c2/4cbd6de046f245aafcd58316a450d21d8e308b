@@ -1,0 +1,24 @@
+docs/specs/trading-agents.md
+  s_cd971305e7b2c7::t_c7dbbeb57e3c51 569,684-755
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "c24cbd6de046f245aafcd58316a450d21d8e308b",
+  "prompts": {},
+  "humans": {
+    "h_18f30fbb681ea5": {
+      "author": "Sukoreno Mukti Widodo <sukoreno.mukti@deliveryhero.com>"
+    }
+  },
+  "sessions": {
+    "s_cd971305e7b2c7": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "0efd75dd-3659-42ce-929a-45b46eac3540",
+        "model": "claude-sonnet-5-5"
+      },
+      "human_author": "Sukoreno Mukti Widodo <sukoreno.mukti@deliveryhero.com>"
+    }
+  }
+}
