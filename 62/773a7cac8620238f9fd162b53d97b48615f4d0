@@ -2,6 +2,7 @@ tests/test_char_tool_dispatch.py
   s_cd971305e7b2c7::t_e729f9ad7b6ac0 76-92
 tests/golden/tool_input_schemas.json
   s_cd971305e7b2c7::t_73411b9addac8f 11385,11537-11630
+  s_cd971305e7b2c7::t_8f7ed1d1867db3 11536
 tests/test_trading_agents_tools.py
   s_cd971305e7b2c7::t_74b834f2e09433 1-11,13-23,25-27,29-142,144-265,295-317,319,321-393
   s_cd971305e7b2c7::t_af29aa4ebdb1bd 318
