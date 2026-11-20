@@ -1,0 +1,28 @@
+frontend/src/components/chat/approval/bodies/TradingAgentsBodies.tsx
+  s_cd971305e7b2c7::t_794eb2074f6d13 73
+frontend/src/components/tabs/connectors/TradingAgentsInstall.tsx
+  s_cd971305e7b2c7::t_794eb2074f6d13 66-70
+frontend/src/components/chat/approval/fixtures/tradingAgentsRun.ts
+  s_cd971305e7b2c7::t_794eb2074f6d13 34
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "95f86eca4e3b5bddc5e731ea629642400f8fc958",
+  "prompts": {},
+  "humans": {
+    "h_18f30fbb681ea5": {
+      "author": "Sukoreno Mukti Widodo <sukoreno.mukti@deliveryhero.com>"
+    }
+  },
+  "sessions": {
+    "s_cd971305e7b2c7": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "0efd75dd-3659-42ce-929a-45b46eac3540",
+        "model": "claude-sonnet-5-5"
+      },
+      "human_author": "Sukoreno Mukti Widodo <sukoreno.mukti@deliveryhero.com>"
+    }
+  }
+}
