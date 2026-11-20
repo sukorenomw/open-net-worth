@@ -1,0 +1,23 @@
+backend/api/demo_lockdown.py
+  s_cd971305e7b2c7::t_d1a0d73ae33016 130-132
+tests/test_trading_agents_api.py
+  s_cd971305e7b2c7::t_d1a0d73ae33016 444-446
+tests/test_demo_lockdown.py
+  s_cd971305e7b2c7::t_057dbf10ab6fd8 99-101
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "6122fd1dc6108194979afbdf71eaf6a3f20a16e0",
+  "prompts": {},
+  "sessions": {
+    "s_cd971305e7b2c7": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "0efd75dd-3659-42ce-929a-45b46eac3540",
+        "model": "claude-sonnet-5-5"
+      },
+      "human_author": "Sukoreno Mukti Widodo <sukoreno.mukti@deliveryhero.com>"
+    }
+  }
+}

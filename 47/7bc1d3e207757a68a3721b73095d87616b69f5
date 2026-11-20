@@ -1,0 +1,31 @@
+tests/test_trading_agents_tools.py
+  s_cd971305e7b2c7::t_1b6fa9c1b9d061 114,182-183,185,189
+tests/test_agents_retired.py
+  s_cd971305e7b2c7::t_db3fa93f547965 77
+  s_cd971305e7b2c7::t_51f734024c82b0 69-76
+backend/ai/trading_agents/bridge_http.py
+  s_cd971305e7b2c7::t_4c1517e38fd574 17
+  s_cd971305e7b2c7::t_9e31965b12bd9e 43
+backend/ai/tools/trading_agents.py
+  s_cd971305e7b2c7::t_8b0ef7382f86d1 23,111-117,120-123,267,302-303,337-338,357-358
+backend/core/mention_guard.py
+  s_cd971305e7b2c7::t_9e31965b12bd9e 50
+tests/claim_registry.py
+  s_cd971305e7b2c7::t_2964af22af23d1 108-109
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "477bc1d3e207757a68a3721b73095d87616b69f5",
+  "prompts": {},
+  "sessions": {
+    "s_cd971305e7b2c7": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "0efd75dd-3659-42ce-929a-45b46eac3540",
+        "model": "claude-sonnet-5-5"
+      },
+      "human_author": "Sukoreno Mukti Widodo <sukoreno.mukti@deliveryhero.com>"
+    }
+  }
+}

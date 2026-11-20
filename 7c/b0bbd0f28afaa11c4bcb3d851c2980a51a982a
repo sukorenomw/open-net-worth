@@ -1,0 +1,57 @@
+frontend/src/types/assetDetail.ts
+  s_cd971305e7b2c7::t_520670fac76414 4,331-339,363-364
+frontend/src/components/intel/TradingAgentsReport.tsx
+  s_cd971305e7b2c7::t_43b37eea9b53b5 1-2,8,88-138,150,153,169-216,218
+frontend/src/utils/tradingAgents.ts
+  s_cd971305e7b2c7::t_2eadd97a8417ff 134-172
+frontend/src/components/intel/useTaPanel.ts
+  s_cd971305e7b2c7::t_032a9c59b85321 1,16-25,109,118-131,150-151
+  s_cd971305e7b2c7::t_8f60f66a650d0a 26-30
+frontend/src/index.css
+  s_cd971305e7b2c7::t_520670fac76414 21679-21709,21874-21876
+docs/product/features/trading-agents.md
+  s_cd971305e7b2c7::t_5b1f497f667d7b 69-77,123-126
+frontend/src/utils/tradingAgents.test.ts
+  s_cd971305e7b2c7::t_1b5f18c97b8fd4 1-52
+frontend/src/components/intel/TradingAgentsPanel.tsx
+  s_cd971305e7b2c7::t_032a9c59b85321 12,56-57,79-83,89-97,157,171,182,196,204-205
+frontend/src/components/intel/TradingAgentsCard.test.tsx
+  s_cd971305e7b2c7::t_8f60f66a650d0a 13,86
+  s_cd971305e7b2c7::t_05dedec983f38b 14,91-100,396,403-411,414-415,424,428-472,474-488,535,544,556,568,588
+  s_cd971305e7b2c7::t_b33392281d438a 412-413,473
+  s_cd971305e7b2c7::t_e7d1756b1dc96b 416
+frontend/src/components/intel/AssetDetailView.taInput.test.tsx
+  s_cd971305e7b2c7::t_233e1f0e049a43 1-167
+frontend/src/components/intel/TradingAgentsInputChip.tsx
+  s_cd971305e7b2c7::t_520670fac76414 1-35
+frontend/src/components/intel/AssetDetailView.tsx
+  s_cd971305e7b2c7::t_520670fac76414 38-39,130-136,1048-1053,1202-1207
+frontend/src/components/intel/TradingAgentsCard.tsx
+  s_cd971305e7b2c7::t_032a9c59b85321 1,4,8-19,21-26,29-33
+  s_cd971305e7b2c7::t_520670fac76414 27
+frontend/src/types/tradingAgentsConstants.ts
+  s_cd971305e7b2c7::t_520670fac76414 175-178
+docs/specs/trading-agents-ui.md
+  s_cd971305e7b2c7::t_66b95629f1261c 986
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "7cb0bbd0f28afaa11c4bcb3d851c2980a51a982a",
+  "prompts": {},
+  "humans": {
+    "h_18f30fbb681ea5": {
+      "author": "Sukoreno Mukti Widodo <sukoreno.mukti@deliveryhero.com>"
+    }
+  },
+  "sessions": {
+    "s_cd971305e7b2c7": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "0efd75dd-3659-42ce-929a-45b46eac3540",
+        "model": "claude-sonnet-5-5"
+      },
+      "human_author": "Sukoreno Mukti Widodo <sukoreno.mukti@deliveryhero.com>"
+    }
+  }
+}

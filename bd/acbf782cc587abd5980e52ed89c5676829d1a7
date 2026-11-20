@@ -1,0 +1,29 @@
+docs/product/features/trading-agents.md
+  s_cd971305e7b2c7::t_8916ac7630ea82 1-2,4-33,35-120,123-149,151-159
+  s_cd971305e7b2c7::t_d543e207f4a3a8 3
+  s_cd971305e7b2c7::t_04bc39fa571634 34,121-122,150
+docs/docs-map.json
+  s_cd971305e7b2c7::t_bed4c6f5db5261 60-68
+docs/adr/README.md
+  s_cd971305e7b2c7::t_04ec1358a41cff 563
+NOTICE
+  s_cd971305e7b2c7::t_3d5f361e55afe7 130-143
+docs/adr/2026-11-19-tradingagents-is-a-plugin-that-calls-llms-only-through-onw.md
+  s_cd971305e7b2c7::t_8558f93c9704fa 1-167
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "bdacbf782cc587abd5980e52ed89c5676829d1a7",
+  "prompts": {},
+  "sessions": {
+    "s_cd971305e7b2c7": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "0efd75dd-3659-42ce-929a-45b46eac3540",
+        "model": "claude-sonnet-5-5"
+      },
+      "human_author": "Sukoreno Mukti Widodo <sukoreno.mukti@deliveryhero.com>"
+    }
+  }
+}

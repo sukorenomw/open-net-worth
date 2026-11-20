@@ -1,0 +1,65 @@
+docs/adr/2026-11-19-tradingagents-is-a-plugin-that-calls-llms-only-through-onw.md
+  s_cd971305e7b2c7::t_00e9b36a408b9b 166-195
+docs/product/features/trading-agents.md
+  s_cd971305e7b2c7::t_00e9b36a408b9b 103-124
+tests/test_trading_agents_runner.py
+  s_cd971305e7b2c7::t_523897bc70174b 210-243
+tests/test_trading_agents_take.py
+  s_cd971305e7b2c7::t_553cbd043b211e 43
+  s_cd971305e7b2c7::t_50bb38d286fa3b 1-14,16-24,26-42,44-82,84-115,117-446
+  s_cd971305e7b2c7::t_d28880222ab11c 15,25,116
+  s_cd971305e7b2c7::t_4a21d88bcdeb87 83
+docs/product/features/intel.md
+  s_cd971305e7b2c7::t_00e9b36a408b9b 236-238
+  s_cd971305e7b2c7::t_cd56f44e6fc788 235
+backend/core/take_refresh.py
+  s_cd971305e7b2c7::t_61eeab42bed32f 1-52
+backend/main.py
+  s_cd971305e7b2c7::t_61eeab42bed32f 683-689
+backend/services/asset_detail.py
+  s_cd971305e7b2c7::t_9e2b14c3dee2b4 46
+  s_cd971305e7b2c7::t_69f99cd1e8413b 1339
+backend/db/trading_agents_run_store.py
+  s_cd971305e7b2c7::t_9e2b14c3dee2b4 48-56
+  s_cd971305e7b2c7::t_584969d736c37e 47,57
+  s_cd971305e7b2c7::t_b255e670537431 111-122
+backend/monitoring/asset_brief.py
+  s_cd971305e7b2c7::t_69f99cd1e8413b 1147-1153,1161,1184-1187,1191-1193,1220
+backend/services/trading_agents/take_input.py
+  s_cd971305e7b2c7::t_e78679a16f1de5 1-76,80-166
+  s_cd971305e7b2c7::t_9e2b14c3dee2b4 77-79
+CLAUDE.md
+  s_cd971305e7b2c7::t_77f689211f6785 545
+backend/monitoring/analyst.py
+  s_cd971305e7b2c7::t_9e2b14c3dee2b4 210,2190-2215
+  s_cd971305e7b2c7::t_8f7277cedd1d89 1870-1884,1915-1916,2808-2814,2855,2912-2926,3392,3395-3397,3414-3415,3478,3724,3734-3736,3751-3752,3812
+  s_cd971305e7b2c7::t_de1554f0679a64 2216-2217
+backend/db/asset_brief_store.py
+  s_cd971305e7b2c7::t_69f99cd1e8413b 35-38
+backend/ai/trading_agents/worker_session.py
+  s_cd971305e7b2c7::t_9e2b14c3dee2b4 110,409-410
+  s_cd971305e7b2c7::t_12c3d3121d0906 28
+  s_cd971305e7b2c7::t_61eeab42bed32f 411-413
+  s_cd971305e7b2c7::t_18ef749bb3dd00 414
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "e391691704754e35777e3cb33f1d3a204e6a20bb",
+  "prompts": {},
+  "humans": {
+    "h_18f30fbb681ea5": {
+      "author": "Sukoreno Mukti Widodo <sukoreno.mukti@deliveryhero.com>"
+    }
+  },
+  "sessions": {
+    "s_cd971305e7b2c7": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "0efd75dd-3659-42ce-929a-45b46eac3540",
+        "model": "claude-sonnet-5-5"
+      },
+      "human_author": "Sukoreno Mukti Widodo <sukoreno.mukti@deliveryhero.com>"
+    }
+  }
+}

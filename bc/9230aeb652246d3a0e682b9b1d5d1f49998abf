@@ -1,0 +1,94 @@
+tests/test_trading_agents_context.py
+  s_cd971305e7b2c7::t_3af08a5f4a9f98 268-271,287-289,335-338
+  s_cd971305e7b2c7::t_5df591474b0477 1-267,272-286,290-334,339-343,346-363,367-373
+  s_cd971305e7b2c7::t_0f9904e59d6db0 344-345,366
+  s_cd971305e7b2c7::t_255d467e5c1ce9 364-365
+tests/test_connector_catalog.py
+  s_cd971305e7b2c7::t_e99029f9de1c1f 172-199
+  s_cd971305e7b2c7::t_a3ffdb6bd3bc0d 16
+backend/db/alembic/versions/202611191200_trading_agents_runs.py
+  s_cd971305e7b2c7::t_c6994c3f9c90f3 1-84
+docs/specs/trading-agents-pinned-findings.md
+  s_cd971305e7b2c7::t_64439cc5264a45 1-96
+backend/services/connectors.py
+  s_cd971305e7b2c7::t_8abf3c8170271e 90,92
+  s_cd971305e7b2c7::t_0c77877d0c759f 110-111
+  s_cd971305e7b2c7::t_280352d05bbfab 89,91,93-94
+backend/db/trading_agents_run_store.py
+  s_cd971305e7b2c7::t_c930463aa9606f 1-79
+backend/core/feature_flags.py
+  s_cd971305e7b2c7::t_5fd5cb2bdf640a 277-294
+tests/test_trading_agents_settings.py
+  s_cd971305e7b2c7::t_dbeec29c007f32 1-114,119-127,129-192
+  s_cd971305e7b2c7::t_e7ad57588b51c3 115-118,128
+tests/test_trading_agents_availability.py
+  s_cd971305e7b2c7::t_97a7eef08aa9c3 90-91,96-97
+  s_cd971305e7b2c7::t_c9fd812297272a 1-89,92-95,98-106,111-125
+  s_cd971305e7b2c7::t_3af08a5f4a9f98 107-110
+backend/services/connector_copy.py
+  s_cd971305e7b2c7::t_6115a97bb24c45 375
+  s_cd971305e7b2c7::t_7be81161c9ffa3 443-452
+backend/ai/checkpoint/_policy.py
+  s_cd971305e7b2c7::t_8143a7eaa4f62c 307-310
+docs/specs/trading-agents.md
+  s_bef3360c30cff3::t_87266abf9a68e6 1-2,5-585
+  s_bef3360c30cff3::t_071e5fe7e2a865 3-4
+backend/services/connector_catalog.py
+  s_cd971305e7b2c7::t_8e18a724a79ac2 210-217
+  s_cd971305e7b2c7::t_53ef30ae6d5c0b 596-620
+  s_cd971305e7b2c7::t_1560b2a05c330a 595
+backend/db/trading_agents_config_store.py
+  s_cd971305e7b2c7::t_120423adcafef3 1-79
+tests/test_trading_agents_runs.py
+  s_cd971305e7b2c7::t_59b342b5a3b5ac 16,67,83
+  s_cd971305e7b2c7::t_3e85957cfc199b 1-15,17-66,68-82,84-91,97-171,177-375
+  s_cd971305e7b2c7::t_3af08a5f4a9f98 92-96,172-176
+backend/services/trading_agents/runs.py
+  s_cd971305e7b2c7::t_3af08a5f4a9f98 27-28,114-116,170-172
+  s_cd971305e7b2c7::t_b212e80c5d43ef 1-26,29-113,117-142,144-169,173-284
+  s_cd971305e7b2c7::t_ae430c07e74440 143
+backend/services/trading_agents/context.py
+  s_cd971305e7b2c7::t_3a46b9bfe927ed 119-120,122
+  s_cd971305e7b2c7::t_3af08a5f4a9f98 33-34,66-68,135-137,187-190
+  s_cd971305e7b2c7::t_09143831411da3 1-32,35-65,69-118,121,123-134,138-186,191-196
+docs/DATA_MODEL.md
+  s_cd971305e7b2c7::t_9c8c95eac0dd56 117-118
+backend/core/errors.py
+  s_cd971305e7b2c7::t_79f48da8e86c00 244-275
+  s_cd971305e7b2c7::t_f7cbef4ede1e32 324-328
+backend/services/trading_agents/ticker.py
+  s_cd971305e7b2c7::t_4d4999abd23328 1-28
+backend/db/tables.py
+  s_cd971305e7b2c7::t_7c68e8b37cfe3e 1710-1767
+backend/services/trading_agents/__init__.py
+  s_cd971305e7b2c7::t_1278e14ee67837 1-90
+CLAUDE.md
+  s_cd971305e7b2c7::t_5cf696b4d2fa7c 79
+backend/services/trading_agents/settings.py
+  s_cd971305e7b2c7::t_ae430c07e74440 124,161
+  s_cd971305e7b2c7::t_cec4a51b02c2af 1-123,125-160,162-300
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "bc9230aeb652246d3a0e682b9b1d5d1f49998abf",
+  "prompts": {},
+  "sessions": {
+    "s_bef3360c30cff3": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "3ae7619d-88dc-4909-a67b-6c280b499df1",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Sukoreno Mukti Widodo <sukoreno.mukti@deliveryhero.com>"
+    },
+    "s_cd971305e7b2c7": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "0efd75dd-3659-42ce-929a-45b46eac3540",
+        "model": "claude-sonnet-5-5"
+      },
+      "human_author": "Sukoreno Mukti Widodo <sukoreno.mukti@deliveryhero.com>"
+    }
+  }
+}
