@@ -1,0 +1,24 @@
+tests/test_tool_schema_budget.py
+  s_cd971305e7b2c7::t_d1cb28aced6029 300-303
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "1ae54e42afcd4fae4a8c160057792dd35905ffa4",
+  "prompts": {},
+  "humans": {
+    "h_18f30fbb681ea5": {
+      "author": "Sukoreno Mukti Widodo <sukoreno.mukti@deliveryhero.com>"
+    }
+  },
+  "sessions": {
+    "s_cd971305e7b2c7": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "0efd75dd-3659-42ce-929a-45b46eac3540",
+        "model": "claude-sonnet-5-5"
+      },
+      "human_author": "Sukoreno Mukti Widodo <sukoreno.mukti@deliveryhero.com>"
+    }
+  }
+}
