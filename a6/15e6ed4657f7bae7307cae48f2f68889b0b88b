@@ -1,0 +1,52 @@
+frontend/src/components/intel/TradingAgentsTakeRow.tsx
+  s_cd971305e7b2c7::t_114845f7394f16 1-252
+frontend/src/components/intel/TradingAgentsPanel.tsx
+  s_cd971305e7b2c7::t_00f1e05dcd2c69 12,14,85,92,153-161,179,188-198,213,223-231,277,279
+frontend/src/components/intel/TradingAgentsCard.tsx
+  s_cd971305e7b2c7::t_00f1e05dcd2c69 4,13,19,33
+frontend/src/components/intel/TradingAgentsInputChip.tsx
+  s_cd971305e7b2c7::t_114845f7394f16 5-8,19,24,27-36
+frontend/src/index.css
+  s_cd971305e7b2c7::t_114845f7394f16 21666,21668-21670,21674,21688-21703
+frontend/src/components/intel/TradingAgentsTakeRow.test.tsx
+  s_cd971305e7b2c7::t_e71b482d5f3067 1-227,231-303
+  s_cd971305e7b2c7::t_fb2c4e200abcf6 228-230
+frontend/src/components/intel/TradingAgentsCard.test.tsx
+  s_cd971305e7b2c7::t_00f1e05dcd2c69 107
+  s_cd971305e7b2c7::t_ff1b9ba86764db 396-422
+frontend/src/components/intel/AssetDetailView.tsx
+  s_cd971305e7b2c7::t_114845f7394f16 38,1048-1051,1053,1208-1215
+frontend/src/types/assetDetail.ts
+  s_cd971305e7b2c7::t_00f1e05dcd2c69 338-342
+frontend/src/components/intel/useTaPanel.ts
+  s_cd971305e7b2c7::t_00f1e05dcd2c69 23-29
+frontend/src/components/intel/TradingAgentsReport.tsx
+  s_cd971305e7b2c7::t_00f1e05dcd2c69 128,135-136,165
+docs/product/features/trading-agents.md
+  s_cd971305e7b2c7::t_cbf528a4f25376 114-115,127-137
+docs/specs/trading-agents-ui.md
+  s_cd971305e7b2c7::t_add9dd0d754b3b 1044-1086
+frontend/src/components/intel/AssetDetailView.taInput.test.tsx
+  s_cd971305e7b2c7::t_b74bf0394da1af 8,32-41,45-56,106,110,114,116,130,138,140-141,144-145,149-160,165,174,177-178,181-182,186,191,195-196,199-212
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "a615e6ed4657f7bae7307cae48f2f68889b0b88b",
+  "prompts": {},
+  "humans": {
+    "h_18f30fbb681ea5": {
+      "author": "Sukoreno Mukti Widodo <sukoreno.mukti@deliveryhero.com>"
+    }
+  },
+  "sessions": {
+    "s_cd971305e7b2c7": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "0efd75dd-3659-42ce-929a-45b46eac3540",
+        "model": "claude-sonnet-5-5"
+      },
+      "human_author": "Sukoreno Mukti Widodo <sukoreno.mukti@deliveryhero.com>"
+    }
+  }
+}
