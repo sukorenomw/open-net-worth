@@ -1,0 +1,23 @@
+tests/test_trading_agents_tools.py
+  s_cd971305e7b2c7::t_90923b76325293 491-522
+  s_cd971305e7b2c7::t_f569a102e3b479 42
+backend/ai/tools/trading_agents.py
+  s_cd971305e7b2c7::t_fd6285c96cc90d 15,33-35,37-38,136-155,222,224,227,232,262
+  s_cd971305e7b2c7::t_f569a102e3b479 36
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "b6b911bf565a0e9f2c9a553975b59787de57adc4",
+  "prompts": {},
+  "sessions": {
+    "s_cd971305e7b2c7": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "0efd75dd-3659-42ce-929a-45b46eac3540",
+        "model": "claude-sonnet-5-5"
+      },
+      "human_author": "Sukoreno Mukti Widodo <sukoreno.mukti@deliveryhero.com>"
+    }
+  }
+}
