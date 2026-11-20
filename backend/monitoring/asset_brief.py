@@ -1144,6 +1144,13 @@ def _provider_name() -> str:
         return "unknown"
 
 
+_TA_PROVENANCE_KEYS = (
+    "trading_agents_run_id",
+    "trading_agents_signal",
+    "trading_agents_trade_date",
+)
+
+
 def apply_analyst_synthesis(
     instrument_id: str,
     key_issues: list[dict],
@@ -1151,6 +1158,7 @@ def apply_analyst_synthesis(
     sources: list[dict],
     now: str,
     verdict: dict | None = None,
+    trading_agents: dict | None = None,
 ) -> None:
     """Write the Analyst pipeline's own key_issues/portfolio_narrative synthesis onto this
     instrument's Asset Brief (Problem B / ADR 2026-08-28-cross-subject-fan-out-and-asset-brief-
@@ -1173,11 +1181,16 @@ def apply_analyst_synthesis(
     module gets. A no-op when `key_issues` is empty — a genuinely-empty synthesis pass is not a
     "delete the prior brief's take" signal, mirroring `_land_analysis`'s own prior non-regression
     stance for this exact field. ``verdict`` (``services.position_verdict.normalize``) is the
-    take's action line; a pass without one keeps the prior call, like the narrative."""
+    take's action line; a pass without one keeps the prior call, like the narrative.
+    ``trading_agents`` (``take_input.TakeInput.provenance()``) records which TradingAgents run
+    informed THIS take; a take written without one carries none (the keys are dropped, not
+    nulled), so the brief never claims a run the take did not read."""
     if not key_issues:
         return
     store = AssetBriefStore()
-    prior = store.get(instrument_id) or {}
+    prior = {
+        k: v for k, v in (store.get(instrument_id) or {}).items() if k not in _TA_PROVENANCE_KEYS
+    }
     stored_issues = _sanitize_key_issues_sources(
         [
             {
@@ -1204,6 +1217,7 @@ def apply_analyst_synthesis(
             "portfolio_narrative": new_narrative or (prior.get("portfolio_narrative") or ""),
             "position_verdict": verdict or prior.get("position_verdict"),
             "key_issues_synthesized_at": now,
+            **(trading_agents or {}),
         }
     )
 
@@ -1237,6 +1251,36 @@ def stamp_key_issues_checked(instrument_id: str, now: str) -> None:
             "instrument_id": instrument_id,
             "key_issues": prior.get("key_issues") or [],
             "key_issues_synthesized_at": now,
+        }
+    )
+
+
+def stamp_trading_agents_attempt(instrument_id: str, run_id: str, now: str) -> None:
+    """A synthesis pass is starting with TradingAgents run ``run_id`` as input
+    (``services.trading_agents.take_input.awaiting``): even a pass that never completes asks again
+    for this run no sooner than ``take_input.RETRY_HOURS``."""
+    store = AssetBriefStore()
+    store.upsert_brief(
+        {
+            **(store.get(instrument_id) or {}),
+            "instrument_id": instrument_id,
+            "trading_agents_attempted_run_id": run_id,
+            "trading_agents_attempted_at": now,
+        }
+    )
+
+
+def stamp_trading_agents_considered(instrument_id: str, run_id: str) -> None:
+    """A COMPLETED pass was shown TradingAgents run ``run_id``, whatever it then wrote — a take, an
+    empty one, nothing. This, not the displayed ``trading_agents_run_id`` (the run the take used),
+    is what ``take_input.supersedes`` compares, so a pass that records no usable take is not asked
+    again by every page load."""
+    store = AssetBriefStore()
+    store.upsert_brief(
+        {
+            **(store.get(instrument_id) or {}),
+            "instrument_id": instrument_id,
+            "trading_agents_considered_run_id": run_id,
         }
     )
 

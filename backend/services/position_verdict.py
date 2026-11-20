@@ -14,6 +14,8 @@ from __future__ import annotations
 
 from collections.abc import Callable
 
+from backend.services.trading_agents import vocabulary
+
 HELD_ACTIONS = ("hold", "add", "trim", "sell")
 WATCHED_ACTIONS = ("buy", "wait")
 _WHY_MAX = 240
@@ -33,6 +35,17 @@ _ORDER_SIDE = {"add": "buy", "buy": "buy", "trim": "sell", "sell": "sell"}
 # prompt asks for at most three; nothing here drops a fourth.
 _LIMIT_BAND = (0.8, 1.2)
 _ALERT_BAND = (0.5, 3.0)
+# A suggested BUY has no cash figure to be checked against here (the verdict is normalized from the
+# model's words and the last price only), so it is bounded by the position instead: the running
+# total of buys may at most double what is held (``_ADD_MULTIPLE``), and a ticker with no position
+# at all may open with at most ``_FIRST_BUY_UNITS`` units. An order past either is dropped, never
+# resized — the same "check, never adjust" stance as the sells.
+_ADD_MULTIPLE = 1.0
+_FIRST_BUY_UNITS = 10_000
+# The overlay reasons that are facts about the research run, not Lucius's own read of the position.
+_RUN_FACTS = frozenset({"stale_run", "position_unseen"})
+# Stored on a call that was held to the research rating; composed only when present.
+_TA_KEYS = ("ta_aligned", "ta_overlay_reason")
 _ALERT_OPS = {"<=": "≤", "<": "<", ">=": "≥", ">": ">"}
 
 
@@ -84,9 +97,11 @@ def _alert(item: dict, price: float) -> dict | None:
 def _actions(raw: object, *, action: str, price: float, held_qty: float | None) -> list[dict]:
     """Lucius's actions, each checked on its own (``_order`` / ``_alert``). Sells are kept in
     Lucius's order only while their running total stays within ``held_qty`` — a staged trim may
-    never add up to more than the position."""
+    never add up to more than the position — and buys while theirs stays within the bound the
+    position sets (``_ADD_MULTIPLE`` / ``_FIRST_BUY_UNITS``)."""
     out: list[dict] = []
-    sold = 0.0
+    sold = bought = 0.0
+    buy_cap = held_qty * _ADD_MULTIPLE if held_qty else _FIRST_BUY_UNITS
     for item in raw if isinstance(raw, list) else []:
         if not isinstance(item, dict):
             continue
@@ -98,24 +113,62 @@ def _actions(raw: object, *, action: str, price: float, held_qty: float | None) 
             if not held_qty or sold + checked["quantity"] > held_qty * (1 + 1e-9):
                 continue
             sold += checked["quantity"]
+        if checked and checked.get("side") == "buy":
+            if bought + checked["quantity"] > buy_cap * (1 + 1e-9):
+                continue
+            bought += checked["quantity"]
         if checked:
             out.append(checked)
     return out
 
 
+def _align_with_research(
+    action: str, raw: dict, *, held: bool, signal: str, facts: frozenset[str]
+) -> tuple[str, dict]:
+    """``(action, extras)``: the call against the research rating. An allowed action stands. Any
+    other stands only with a valid ``ta_overlay_reason`` (kept as ``extras`` for the page) — the two
+    reasons that are facts about the run hold only when ``facts`` says so. Otherwise the allowed
+    action nearest to it replaces it (``ta_aligned``)."""
+    allowed = vocabulary.allowed_actions(signal, held)
+    if not allowed or action in allowed:
+        return action, {}
+    reason = str(raw.get("ta_overlay_reason") or "").strip().lower()
+    if reason in vocabulary.OVERLAY_REASONS and (reason not in _RUN_FACTS or reason in facts):
+        return action, {"ta_overlay_reason": reason}
+    return vocabulary.nearest_allowed(action, signal, held), {"ta_aligned": True}
+
+
 def normalize(
-    raw: object, *, held: bool, price: float | None, held_qty: float | None = None
+    raw: object,
+    *,
+    held: bool,
+    price: float | None,
+    held_qty: float | None = None,
+    ta_signal: str | None = None,
+    ta_facts: frozenset[str] = frozenset(),
 ) -> dict | None:
     """The model's verdict as stored on the Asset Brief, or None when unusable: ONE verdict from
     the held / watched set, a one-line why, each level that passes its bound at ``price``, and
-    the actions that pass their checks (``_actions``). No price → no levels and no actions."""
+    the actions that pass their checks (``_actions``). No price → no levels and no actions.
+
+    With ``ta_signal`` (the take read a TradingAgents run) the action is also held to what that
+    rating allows (``_align_with_research``); a replaced action takes a plain why of its own — the
+    model's was written for the action it lost — and its orders drop by the usual side check.
+    Without it nothing about the verdict changes."""
     if not isinstance(raw, dict):
         return None
     action = str(raw.get("action") or "").strip().lower()
     why = " ".join(str(raw.get("why") or "").split())
     if action not in (HELD_ACTIONS if held else WATCHED_ACTIONS) or not why:
         return None
-    out: dict = {"action": action, "why": why[:_WHY_MAX], "held": held}
+    extras: dict = {}
+    if ta_signal:
+        action, extras = _align_with_research(
+            action, raw, held=held, signal=ta_signal, facts=ta_facts
+        )
+        if extras.get("ta_aligned"):
+            why = f"TradingAgents rated {ta_signal}: {vocabulary.view(ta_signal, held)}."
+    out: dict = {"action": action, "why": why[:_WHY_MAX], "held": held, **extras}
     if price and price > 0:
         out["price_at"] = price
         for kind in _levels_for(held):
@@ -235,6 +288,7 @@ def compose(
         "levels": levels,
         "actions": stored_actions(stored),
         "currency": currency,
+        **{k: stored[k] for k in _TA_KEYS if k in stored},
     }
 
 

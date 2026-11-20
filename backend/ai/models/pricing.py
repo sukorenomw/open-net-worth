@@ -32,6 +32,8 @@ from __future__ import annotations
 
 import logging
 
+from backend.core.local_endpoint import is_local_base_url as _is_local_base_url
+
 log = logging.getLogger(__name__)
 
 # ---------------------------------------------------------------------------
@@ -110,6 +112,20 @@ def list_price_rates(model: str, base_url: str = "") -> "tuple[float, float] | N
     from backend.ai.models.price_map import vendored_rates
 
     return vendored_rates(model, base_url)
+
+
+def approximate_price_rates(
+    model: str, base_url: str = ""
+) -> "tuple[tuple[float, float], str] | None":
+    """``(rates, priced_as)`` for a dated snapshot with no price row of its own, priced as the
+    undated model (``price_map.approximate_rates``); None when ``list_price_rates`` has an answer
+    or the undated model is unknown. Callers disclose it and reserve a margin over it."""
+    model = (model or "").strip()
+    if not model or list_price_rates(model, base_url) is not None:
+        return None
+    from backend.ai.models.price_map import approximate_rates
+
+    return approximate_rates(model, base_url)
 
 
 def cost_usd_anthropic(
@@ -295,19 +311,6 @@ def cache_read_discount(model: str) -> float:
         if normalized.startswith(prefix):
             return discount
     return _OAI_CACHE_READ_DEFAULT
-
-
-def _is_local_base_url(base_url: str) -> bool:
-    """Return True if base_url points at a local process (Ollama/LM Studio/vLLM)."""
-    url = base_url.lower().strip()
-    return (
-        url.startswith("http://localhost")
-        or url.startswith("https://localhost")
-        or url.startswith("http://127.")
-        or url.startswith("https://127.")
-        or url.startswith("http://[::1]")
-        or url.startswith("http://0.0.0.0")
-    )
 
 
 def _openai_rates(model: str) -> tuple[float, float] | None:

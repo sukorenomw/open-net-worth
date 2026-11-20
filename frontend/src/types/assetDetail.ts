@@ -1,6 +1,7 @@
 // Asset detail API contract — mirrors GET /api/intel/assets/{instrument_id}
 
 import type { IncomeEvent, Lot, RealizedEvent } from './portfolio'
+import type { TaSignal } from './tradingAgents'
 
 export interface Citation {
   url: string
@@ -327,6 +328,20 @@ export interface PositionVerdict {
   currency: string
 }
 
+/** The TradingAgents run Lucius's take was written with — null when none went in (no run, flag
+ *  off, or not an equity). `age_days` is how old the run's analysis date was at serve time. */
+export interface TradingAgentsInput {
+  run_id: string
+  signal: TaSignal
+  trade_date: string
+  age_days: number
+  /** The server's one-line plain-language reading of the signal for this position (held or not);
+   *  absent when it has none — the browser never derives one. */
+  view?: string
+  held?: boolean
+  allowed_actions?: string[]
+}
+
 export interface AssetDetail {
   instrument_id: string
   asset: AssetInfo
@@ -350,6 +365,8 @@ export interface AssetDetail {
   has_narrative: boolean
   /** The take's one call and the levels that would change it — null until a synthesis gives one. */
   position_verdict?: PositionVerdict | null
+  /** The TradingAgents run the take used, so the page can say so and link to it. */
+  trading_agents_input?: TradingAgentsInput | null
   freshness?: Freshness
   /** Real progress marker for an in-flight backend refresh — null when no refresh is running.
    *  Written by monitoring.asset_brief._do_refresh as each stage actually completes; drives

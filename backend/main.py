@@ -208,6 +208,7 @@ from backend.api.sql_query import router as sql_query_router
 from backend.api.statement_parse_api import router as statement_parse_router
 from backend.api.terminal import router as terminal_router
 from backend.api.tool_permissions import router as tool_permissions_router
+from backend.api.trading_agents import router as trading_agents_router
 from backend.api.upload import router as upload_router
 from backend.api.vault import router as vault_router
 from backend.api.visuals import router as visuals_router
@@ -679,6 +680,13 @@ async def lifespan(app: FastAPI):
 
     register_runner(_headless_turn_runner)
 
+    # A finished TradingAgents run refreshes Lucius's take on its ticker (core.take_refresh seam:
+    # ai cannot import monitoring, which reaches api).
+    from backend.core import take_refresh
+    from backend.monitoring.analyst import refresh_take_for_run
+
+    take_refresh.register(refresh_take_for_run)
+
     # Automation Lucius runs are durable conversations. Register the AI-layer adapter on
     # the dependency-inverted core/service seams only after the AI package is initialized.
     from backend.ai.automation_runner_adapter import (
@@ -902,6 +910,14 @@ async def lifespan(app: FastAPI):
 
     install_shutdown_watch()
 
+    # A TradingAgents run or install the last process left half-done can never continue.
+    from backend.ai.trading_agents import runner as trading_agents_runner
+
+    try:
+        trading_agents_runner.recover()
+    except Exception:
+        _log.exception("TradingAgents boot recovery failed (non-fatal)")
+
     yield
     mark_closing()
     if _SCHEDULER_OWNERSHIP is not None:
@@ -912,6 +928,8 @@ async def lifespan(app: FastAPI):
     from backend.ai.turns import shutdown as shutdown_turns
 
     await shutdown_turns()
+    await trading_agents_runner.shutdown()
+    await take_refresh.shutdown()
     memory_sweep_task = getattr(app.state, "memory_sweep_task", None)
     if memory_sweep_task is not None:
         memory_sweep_task.cancel()
@@ -1191,6 +1209,7 @@ app.include_router(intel_assets_router)
 app.include_router(investment_theses_router)
 app.include_router(followed_portfolios_router)
 app.include_router(paper_trading_router)
+app.include_router(trading_agents_router)
 app.include_router(intel_digest_router)
 app.include_router(intel_watch_router)
 app.include_router(intel_signals_router)

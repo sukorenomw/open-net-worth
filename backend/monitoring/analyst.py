@@ -179,6 +179,7 @@ from __future__ import annotations
 import asyncio
 import functools
 import logging
+import re
 import time
 from datetime import datetime, timedelta, timezone
 from uuid import uuid4
@@ -189,6 +190,7 @@ import backend.services.alert_feed as alert_feed
 import backend.services.claims as _claims_svc
 import backend.services.evidence as _evidence_svc
 from backend.ai.structured import complete_model
+from backend.core import data_events
 from backend.core.urls import registrable_domain
 from backend.db.intel_stories_store import IntelStoriesStore
 from backend.db.pending_analysis_store import PendingAnalysisStore
@@ -207,6 +209,7 @@ from backend.monitoring.analyst_prompt import (
 from backend.monitoring.text_sanitize import content_tokens, sanitize_untrusted_text, tokenize
 from backend.services import position_verdict, thesis_judgment
 from backend.services.intel_stories import apply_story_change
+from backend.services.trading_agents import take_input
 from backend.services.watchlist import is_topic, read_watchlist
 
 logger = logging.getLogger(__name__)
@@ -644,8 +647,12 @@ def _build_prompts(
     analyst_consensus_block: str = "",
     is_held: bool = False,
     want_key_issues: bool = False,
+    trading_agents_block: str = "",
 ) -> tuple[str, str]:
     """Build (user_prompt, system_prompt) for the LLM synthesis call.
+
+    trading_agents_block (``_trading_agents_block``) is third-party model output, so it is its own
+    fenced DATA block beside the untrusted news — never part of the trusted context header.
 
     Branches (via _event_framing) on the row's subject/trigger: a topic subject uses
     watch-context framing (no ticker/position — it's a theme, not a holding); an asset
@@ -815,6 +822,7 @@ def _build_prompts(
         f"{_profile_block(profile)}"
         f"{prior_analysis_block(prior_summary)}"
         f"{prior_notes_block(prior_notes or [])}"
+        f"{trading_agents_block}"
         "\n--- BEGIN UNTRUSTED NEWS DATA ---\n"
         f"{evidence_block}\n"
         "--- END UNTRUSTED NEWS DATA ---\n\n"
@@ -1866,6 +1874,21 @@ def _key_issues_stale(brief: dict) -> bool:
     return _freshness_grade(age_days) != "fresh"
 
 
+def _trading_agents_supersedes(brief: dict) -> bool:
+    """True while the take has not seen the ticker's newest usable TradingAgents run — it is stale
+    with respect to it, so the next page open regenerates it (the fallback when the refresh asked
+    for at run finish found a pass already in flight). False on any failure."""
+    try:
+        from backend.db.instrument_store import InstrumentStore
+
+        iid = brief.get("instrument_id") or ""
+        inst = InstrumentStore().find_by_id(iid) or {} if iid else {}
+        return take_input.supersedes(brief, inst.get("price_source_id") or "")
+    except Exception as exc:
+        logger.debug("analyst: TradingAgents staleness check failed: %s", type(exc).__name__)
+        return False
+
+
 def _key_issues_force_stale(brief: dict) -> bool:
     """True when a held-or-watched instrument's key_issues are stale enough to justify an
     on-demand, RIGHT-NOW top-up (`trigger_on_demand_brief_refresh`) rather than waiting for
@@ -1896,6 +1919,8 @@ def _key_issues_force_stale(brief: dict) -> bool:
     filled, narrative empty) read as "has content" here — the 12h cooldown applied — while the
     frontend simultaneously read it as "still generating" forever. Requiring narrative
     specifically closes that mismatch."""
+    if _trading_agents_supersedes(brief):
+        return True
     ts = brief.get("key_issues_synthesized_at")
     if not ts:
         return True
@@ -2105,7 +2130,7 @@ async def trigger_on_demand_brief_refresh(instrument_id: str, *, force: bool = F
     # `force` is the page's Refresh: the user asked for a new take now, so the 12h cooldown is
     # skipped. The in-flight and failure guards below still hold — a second click mid-run is a
     # no-op, never a second model call.
-    if not force and not _key_issues_force_stale(brief):
+    if not force and not await asyncio.to_thread(_key_issues_force_stale, brief):
         return False
 
     pa_store = PendingAnalysisStore()
@@ -2167,6 +2192,34 @@ async def trigger_on_demand_brief_refresh(instrument_id: str, *, force: bool = F
     else:
         asset_brief.stamp_key_issues_refresh_stage(iid, "ready")
     return True
+
+
+async def refresh_take_for_run(run_id: str) -> bool:
+    """A TradingAgents run just finished: ask the on-demand synthesis trigger (the page-open path,
+    with its in-flight and failure guards) to rewrite that instrument's take with it. Does nothing
+    when the instrument has no take yet (an unviewed ticker costs nothing), when a pass was already
+    shown this run (or started for it within ``take_input.RETRY_HOURS``), or when the run is not an input (feature off, connector paused, REVIEW, too
+    old). Returns True only when a pass was started. If the trigger declines because a pass is
+    already in flight, `_key_issues_force_stale` makes the next page open regenerate the take."""
+    from backend.db.asset_brief_store import AssetBriefStore
+    from backend.db.instrument_store import InstrumentStore
+    from backend.db.trading_agents_run_store import TradingAgentsRunStore
+
+    run = TradingAgentsRunStore().get(run_id)
+    if not run or run["status"] != "done":
+        return False
+    iid = run.get("instrument_id") or (
+        InstrumentStore().find_by_price_source_id(run["ticker"]) or {}
+    ).get("id")
+    if not iid:
+        return False
+    brief = AssetBriefStore().get(iid) or {}
+    if not (brief.get("portfolio_narrative") or "").strip():
+        return False
+    ta = _trading_agents_input(iid)
+    if ta is None or not take_input.awaiting(brief, ta):
+        return False
+    return await trigger_on_demand_brief_refresh(iid, force=True)
 
 
 async def trigger_on_demand_facts_peers_refresh(instrument_id: str) -> bool:
@@ -2759,7 +2812,13 @@ async def _fetch_analyst_consensus_block(instrument_id: str) -> str:
 
 
 def _write_asset_brief_synthesis(
-    instrument_id: str, parsed: dict, evidence: list[dict], now: str, *, held: bool
+    instrument_id: str,
+    parsed: dict,
+    evidence: list[dict],
+    now: str,
+    *,
+    held: bool,
+    trading_agents: take_input.TakeInput | None = None,
 ) -> None:
     """Write this synthesis call's `key_issues`/`portfolio_narrative` onto the held-or-watched
     instrument's Asset Brief (Problem B point 1, Correction) — the Analyst pipeline's own
@@ -2799,7 +2858,8 @@ def _write_asset_brief_synthesis(
                 parsed.get("portfolio_narrative") or "",
                 source_dicts(evidence),
                 now,
-                verdict=_brief_verdict(instrument_id, parsed, held, now),
+                verdict=_brief_verdict(instrument_id, parsed, held, now, trading_agents),
+                trading_agents=trading_agents.provenance() if trading_agents else None,
             )
         else:
             asset_brief.stamp_key_issues_checked(instrument_id, now)
@@ -2820,6 +2880,12 @@ def _write_asset_brief_synthesis(
             instrument_id,
             type(exc).__name__,
         )
+    # Whatever the write did, the pass was shown the run: a failed write must not make every page
+    # load ask for it again.
+    _consider_trading_agents(instrument_id, trading_agents)
+    # The open asset page learns the take changed. Nothing here can loop: a completed pass has just
+    # recorded the run it was shown, so the refetch this triggers finds nothing superseded.
+    data_events.publish(["intel"])
 
 
 def _verdict_context(instrument_id: str, *, held: bool) -> str:
@@ -2856,15 +2922,99 @@ def _verdict_context(instrument_id: str, *, held: bool) -> str:
     return "".join(f"\n\n{p}" for p in parts)
 
 
-def _brief_verdict(instrument_id: str, parsed: dict, held: bool, now: str) -> dict | None:
-    """The synthesis's verdict, checked against the last price on file (no network), stamped
-    with when it was made so the next take can be shown it."""
+def _trading_agents_input(instrument_id: str, held: bool = False) -> take_input.TakeInput | None:
+    """The ticker's TradingAgents digest for the take (``services.trading_agents.take_input``), or
+    None — feature off, no usable run, or ANY failure: the take is then produced as it always was."""
+    try:
+        from backend.db.instrument_store import InstrumentStore
+
+        inst = InstrumentStore().find_by_id(instrument_id) or {}
+        return take_input.latest(inst.get("price_source_id") or "", held=held)
+    except Exception as exc:
+        logger.debug(
+            "analyst: TradingAgents input failed for %s: %s", instrument_id, type(exc).__name__
+        )
+        return None
+
+
+_DATA_DELIMITER_RE = re.compile(r"(?:BEGIN|END)\s+TRADINGAGENTS\s+DATA", re.IGNORECASE)
+_TRADING_AGENTS_LINE_CHARS = 1_500
+
+
+def _trading_agents_block(ta: take_input.TakeInput) -> str:
+    """``ta`` as its own fenced DATA block for the prompt: third-party model output, so every line
+    is scrubbed like the news snippets are (dash runs, control characters), put on one line, and
+    stripped of the fence's own words — nothing in it can open a line that reads as the prompt's
+    structure or close the fence early."""
+    lines = []
+    for line in ta.lines():
+        text = sanitize_untrusted_text(line, _TRADING_AGENTS_LINE_CHARS)
+        while _DATA_DELIMITER_RE.search(text):
+            text = _DATA_DELIMITER_RE.sub("", text)
+        lines.append(" ".join(text.split()))
+    return f"\n{take_input.BEGIN}\n" + "\n".join(lines) + f"\n{take_input.END}\n"
+
+
+def _take_input_for_pass(row: dict, instrument_id: str, held: bool) -> take_input.TakeInput | None:
+    """The TradingAgents digest for one synthesis pass, and a record that the pass started with it.
+    Only the take's own ``brief_stale`` pass reads it: a crash / news-spike / material-news pass
+    writes the Intel timeline and can push, and research text must never reach either."""
+    if not instrument_id or row.get("trigger") != "brief_stale":
+        return None
+    ta = _trading_agents_input(instrument_id, held)
+    if ta is not None:
+        try:
+            from backend.monitoring import asset_brief
+
+            asset_brief.stamp_trading_agents_attempt(
+                instrument_id, ta.run_id, datetime.now(timezone.utc).isoformat()
+            )
+        except Exception as exc:
+            logger.warning(
+                "analyst: TradingAgents attempt stamp failed for %s: %s",
+                instrument_id,
+                type(exc).__name__,
+            )
+    return ta
+
+
+def _consider_trading_agents(instrument_id: str, ta: take_input.TakeInput | None) -> None:
+    """Record that a COMPLETED pass was shown ``ta``'s run, whatever it wrote. Best-effort."""
+    if not ta or not instrument_id:
+        return
+    try:
+        from backend.monitoring import asset_brief
+
+        asset_brief.stamp_trading_agents_considered(instrument_id, ta.run_id)
+    except Exception as exc:
+        logger.warning(
+            "analyst: TradingAgents considered stamp failed for %s: %s",
+            instrument_id,
+            type(exc).__name__,
+        )
+
+
+def _brief_verdict(
+    instrument_id: str,
+    parsed: dict,
+    held: bool,
+    now: str,
+    trading_agents: take_input.TakeInput | None = None,
+) -> dict | None:
+    """The synthesis's verdict, checked against the last price on file (no network) and, when the
+    take read a TradingAgents run, against what that rating allows — stamped with when it was
+    made so the next take can be shown it."""
     from backend.db.instrument_store import InstrumentStore
 
     inst = InstrumentStore().find_by_id(instrument_id) or {}
     price = thesis_judgment.local_price(inst) if inst else None
     verdict = position_verdict.normalize(
-        parsed.get("verdict"), held=held, price=price, held_qty=_held_quantity(instrument_id)
+        parsed.get("verdict"),
+        held=held,
+        price=price,
+        held_qty=_held_quantity(instrument_id),
+        ta_signal=trading_agents.signal if trading_agents else None,
+        ta_facts=trading_agents.facts() if trading_agents else frozenset(),
     )
     return {**verdict, "at": now} if verdict else None
 
@@ -3603,6 +3753,7 @@ async def _process_row(
     held_instrument_id = ""
     brief_instrument_id = ""
     analyst_block = ""
+    trading_agents = None
     if not is_topic:
         iid = subject[len("asset:") :] if subject.startswith("asset:") else ""
         if iid and _is_held_instrument(iid):
@@ -3612,6 +3763,9 @@ async def _process_row(
             brief_instrument_id = iid
         if brief_instrument_id:
             analyst_block = await _fetch_analyst_consensus_block(brief_instrument_id)
+            trading_agents = _take_input_for_pass(
+                row, brief_instrument_id, bool(held_instrument_id)
+            )
     t_consensus = time.monotonic()
 
     # Captured HERE, immediately before the read — NOT after the LLM call below completes (INT14b
@@ -3642,6 +3796,7 @@ async def _process_row(
     t_evidence = time.monotonic()
     if not evidence:
         logger.debug("analyst: no evidence for %s — marking done", ticker or subject)
+        _consider_trading_agents(brief_instrument_id, trading_agents)
         await asyncio.to_thread(pa_store.mark_done, row_id)
         return 0
 
@@ -3666,9 +3821,12 @@ async def _process_row(
         analyst_consensus_block=analyst_block,
         is_held=bool(held_instrument_id),
         want_key_issues=bool(brief_instrument_id),
+        trading_agents_block=_trading_agents_block(trading_agents) if trading_agents else "",
     )
     if thesis:
         system_prompt += thesis_judgment.THESIS_RULE
+    if trading_agents:
+        system_prompt += take_input.RULE
     result = await complete_model(
         user_prompt,
         _AnalysisOutput,
@@ -3696,12 +3854,14 @@ async def _process_row(
         # empty body. Mark the row done so it isn't reprocessed forever.
         logger.warning("analyst: no usable analysis for %s — skipping upsert/push", subject)
         _log_phase_timing()
+        _consider_trading_agents(brief_instrument_id, trading_agents)
         await asyncio.to_thread(pa_store.mark_done, row_id)
         return 1
     parsed = _with_thesis_line(result.model_dump(), thesis)
     if not _analysis_matches_subject(row, parsed):
         logger.warning("analyst: skipped off-subject analysis for %s", subject)
         _log_phase_timing()
+        _consider_trading_agents(brief_instrument_id, trading_agents)
         await asyncio.to_thread(pa_store.mark_done, row_id)
         return 1
     materiality = _materiality_of(parsed)
@@ -3728,6 +3888,7 @@ async def _process_row(
             evidence,
             datetime.now(timezone.utc).isoformat(),
             held=bool(held_instrument_id),
+            trading_agents=trading_agents,
         )
 
     # Owner override of RFC intel-signals-data-model §4's "NO-GO" —
