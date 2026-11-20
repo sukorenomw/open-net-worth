@@ -1,0 +1,73 @@
+tests/test_trading_agents_bridge.py
+  s_cd971305e7b2c7::t_81acb692dfaa96 89-94,318-322,334-337,574-673,675-677,679,681-690,703-709
+  s_cd971305e7b2c7::t_f7354e9b68c4f5 674,678,680,692-702,710-717
+  s_cd971305e7b2c7::t_9396aba9b1c452 691
+backend/ai/trading_agents/bridge_http.py
+  s_cd971305e7b2c7::t_abd966f1e19a16 15
+backend/ai/trading_agents/billing.py
+  s_cd971305e7b2c7::t_e5323dc6fbf63c 1-14,21-56
+  s_cd971305e7b2c7::t_4b1302771242ac 15-20
+backend/ai/trading_agents/worker_session.py
+  s_cd971305e7b2c7::t_3c21c5248e2a70 86,134-136,138-139,200,270-272,372
+  s_cd971305e7b2c7::t_9396aba9b1c452 22-27
+tests/test_trading_agents_billing.py
+  s_cd971305e7b2c7::t_90923b76325293 1-69
+backend/services/trading_agents/settings.py
+  s_cd971305e7b2c7::t_e5323dc6fbf63c 14,72-74,82-83,99,103,107-110,121-145,382-383
+  s_cd971305e7b2c7::t_3c21c5248e2a70 389-400
+  s_cd971305e7b2c7::t_9396aba9b1c452 93-95,100-102
+  s_cd971305e7b2c7::t_30571b581b67b1 401-402
+tests/test_local_endpoint.py
+  s_cd971305e7b2c7::t_81acb692dfaa96 1-49
+tests/test_trading_agents_settings.py
+  s_cd971305e7b2c7::t_90923b76325293 207-244
+backend/ai/trading_agents/worker_env.py
+  s_cd971305e7b2c7::t_a4ee39b5ac72a1 6-8,12,43-54
+  s_cd971305e7b2c7::t_0c2889ee41de93 55-56
+docs/product/features/trading-agents.md
+  s_cd971305e7b2c7::t_70b3dc617c2912 148-155,177-183
+backend/ai/trading_agents/llm_bridge.py
+  s_cd971305e7b2c7::t_2326dc8817621a 179-185
+  s_cd971305e7b2c7::t_ece3eac33ce64b 15-17,82-85,223-226,233-236,249,287,351,406-428
+  s_cd971305e7b2c7::t_a0712a81ad6fa2 86
+backend/services/trading_agents/budget.py
+  s_cd971305e7b2c7::t_97908f5d90f16e 9,114-117,120,123-124,130-131,134
+CLAUDE.md
+  s_cd971305e7b2c7::t_2162dc2410b2fc 302
+backend/core/local_endpoint.py
+  s_cd971305e7b2c7::t_e52194e931c642 3-7,11-16,20-38
+backend/ai/trading_agents/runner.py
+  s_cd971305e7b2c7::t_f2bf2a9c9d0600 26,43-44
+  s_cd971305e7b2c7::t_e5323dc6fbf63c 25,83
+backend/ai/trading_agents/bridge_models.py
+  s_cd971305e7b2c7::t_abd966f1e19a16 23-26,32,50-54,56-65,68-70,72,80
+  s_cd971305e7b2c7::t_9396aba9b1c452 27-29
+  s_cd971305e7b2c7::t_43c8c38e4d4914 81
+docs/adr/2026-11-19-tradingagents-is-a-plugin-that-calls-llms-only-through-onw.md
+  s_cd971305e7b2c7::t_70b3dc617c2912 50-58,96-101,138-156
+tests/test_trading_agents_runner.py
+  s_cd971305e7b2c7::t_9396aba9b1c452 228-230,342-344,366-368
+  s_cd971305e7b2c7::t_a320cb63bba846 809-838,840-841
+  s_cd971305e7b2c7::t_8c5b884cc1faf5 839,842
+tests/fixtures/trading_agents/fake_worker.py
+  s_cd971305e7b2c7::t_9396aba9b1c452 111-116
+  s_cd971305e7b2c7::t_a320cb63bba846 10-12,109-110,117-119,146-151
+tests/test_trading_agents_budget_costs.py
+  s_cd971305e7b2c7::t_90923b76325293 165-171
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "1c7dd521f5bdcf8f467b7986b0be22a93a1cbef7",
+  "prompts": {},
+  "sessions": {
+    "s_cd971305e7b2c7": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "0efd75dd-3659-42ce-929a-45b46eac3540",
+        "model": "claude-sonnet-5-5"
+      },
+      "human_author": "Sukoreno Mukti Widodo <sukoreno.mukti@deliveryhero.com>"
+    }
+  }
+}
